@@ -1,6 +1,6 @@
 ---
 title: "Lab 3 Report"
-author: "___"
+author: "Faith"
 date: "`r format(Sys.Date())`"
 output: github_document
 ---
@@ -11,23 +11,51 @@ Instructions for this lab report can be found on [Your assignment section of Lab
 
 > A. Insert an R code chunk and create a graph depicting the frequency distribution of the 35 mass measurements. It should have legible text and appropriate axis labels.
 
-\_\_\_
+First the packages from tidyverse were read in.
+
+```{r}
+library(tidyverse)
+```
+
+Then, those packages were read in and assigned the value of firefly_mass.
+
+```{r}
+firefly_mass <- read_csv("https://whitlockschluter.zoology.ubc.ca/wp-content/data/chapter02/chap02q19FireflySpermatophoreMass.csv")
+firefly_mass
+```
+
+The data and packages were then used to create a histogram to depict the spermatophore masses of the fireflies.
+
+```{r}
+
+ggplot(data = firefly_mass) +
+  geom_histogram(mapping = aes(x = spermatophoreMass), bins = 10,
+                 boundary = 0, closed = "left", 
+                 fill = "#8250e5", color = "black") +
+  labs(x = "Spermatophore Mass (g)", y = "Frequency (Number of Individuals") +
+  theme_classic(base_size = 12) +
+  theme(
+    axis.title = element_text(face = "bold"),
+    axis.text = element_text(color = "black", size = rel(1)),
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    )
+```
 
 > B. What type of graph did you choose in part (A)? Why?
 
-\_\_\_
+A histogram was selected for depicting the firefly mass data. It was chosen because the data being depicted is a numerical type of data but there is only one set of data being examined. Histograms allow for clear depiction of numerical data, especially when the data is a range of values.
 
 > C. Describe the shape of the frequency distribution. What are its main features?
 
-\_\_\_
+The distribution of masses among the firefly spermatophores was heavily in favor of masses between 0 and 0.1. With a bell curve appearance in these values. Most of the masses appeared to fall between .05 and .075. No data points exist between points .1 and .17. Finally after .17 there are a couple outliers who were recorded having larger masses.
 
 > D. What term would be used to describe the largest measurement in the frequency distribution? You can refer to the lecture slides, your notes, or the textbook.
 
-\_\_\_
+Mode would be the term to refer to the largest measurement. The mode is defined as the most frequently occurring value in the data set. Due to this being a histogram, one single value is not represented by each bar rather a range of values is represented by each bar this makes the mode a range of values. The bar with the largest height indicates the more commonly seen range of masses in the spermataphores, thus making that bar representative of the mode.
 
 ## Bird orders
 
-I read the data using the code provided by the instructor. The dataset is from the auk package and was originally named ebird_taxonomy. I converted it to a tibble, removed non-species taxa, and named the new dataset birds.
+I read the data using the code provided by the instructor. The dataset is from the auk package and was originally named ebird_taxonomy. I converted it to a tibble, removed non-species taxa, and named the new dataset birds. This was done after the fireflies data, and tidyverse was already read into the R script.
 
 ```{r}
 library(auk)                          # load the auk package
@@ -38,25 +66,44 @@ birds <- ebird_taxonomy %>%           # start with the ebird_taxonomy data
 
 > E. How many bird species are in the new birds dataset? How did you find out?
 
-\_\_\_
+There are 10,721 bird species in this data set. This value was found utilizing the count function.
+
+```{r}
+count(birds)
+```
 
 > H. How many orders are there? You can get this right by counting on the graph, but you will only get full points if you use some code to figure it out.
 
-\_\_\_
+There are 41 orders of bird species. This value was found utilizing the count function.
+
+```{r}
+count(birds,order)
+```
 
 > F. Insert an R code chunk and create a graph depicting the distribution of orders in the birds dataset. Sort the orders with the most frequent on the left. It should have legible text and appropriate axis labels.
 
-\_\_\_
+```{r}
+ggplot(data = birds) +
+  geom_bar(mapping = aes(x = fct_infreq(order)), fill = "#c5351B",
+          width = .75) +
+  labs(x = "Orders", y = "Number of Species") +
+  theme(
+    axis.title = element_text(face = "bold"),
+    axis.text = element_text(color = "black", size = rel(.9)),
+    axis.text.x = element_text(angle = 90, hjust = 1),
+    axis.ticks.x = element_blank()
+  )
+```
 
 > G. What kind of graph did you create? Why?
 
-\_\_\_
+A bar graph was utilized to depict this information. This was done because the variable being depicted is a categorical variable. The information desired is orders of birds, therefore the data is best depicted using a bar graph which can assign a single bar to each order.
 
 ## Links to peer review
 
-I reviewed \_\_\_'s lab report at this URL: \_\_\_
+I reviewed Logan Hillers' lab report at this URL: https://github.com/BIOL275-MSUM/lab-3-intro-to-ggplot-LoganHillers.git
 
-\_\_\_ reviewed my lab report at this URL: \_\_\_
+Logan Hillers' reviewed my lab report at this URL: https://github.com/BIOL275-MSUM/lab-3-intro-to-ggplot-CForEffort.git
 
 ## Session Info
 
