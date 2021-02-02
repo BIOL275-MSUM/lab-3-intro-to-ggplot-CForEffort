@@ -31,6 +31,6 @@ The objectives of this lab are:
 
 The repository contains the following scripts:
 
-  - [Lab Report 3](lab-report.Rmd)
+  - [Lab Report 3](lab-report.md)
   - [A Tutorial Walk Through](tutorial-walk-through.R)
   - [Rough Lab Work](coding-workspace-for-lab-3.R)
